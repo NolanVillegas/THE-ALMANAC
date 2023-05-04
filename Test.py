@@ -22,6 +22,8 @@ with open('filename.json', 'w') as handle:
 
 
 with open("my_list.txt", "w") as handle:
+        handle.write("{:^200}  {:^125}\n".format("Function:","Syntax:\n"))
         for key, value in mydict.items():
-            handle.write(f"Function: {value}          Syntax:{key}\n")
+             handle.write("{:^200}  {:^125}\n".format(value, key))
+            
        
