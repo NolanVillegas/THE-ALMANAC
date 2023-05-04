@@ -1,0 +1,9 @@
+Function: a          Syntax:b
+Function: dd          Syntax:ba
+Function: b          Syntax:c
+Function: ac          Syntax:d
+Function: d          Syntax:e
+Function: h          Syntax:h
+Function: t          Syntax:t
+Function: function          Syntax:value
+Function: i          Syntax:i

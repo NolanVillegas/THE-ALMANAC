@@ -5,17 +5,23 @@ with open('filename.json', 'r') as handle:
 
 function_input = input("Function: ")
 mylist = function_input.split("|")
-key = mylist[1].strip()
 value = mylist[0].strip()
+key = mylist[1].strip()
 
-mydict[key] = value
+mydict[value] = key
 
 
 
 with open('filename.json', 'w') as handle:
-    json.dump(mydict, handle)
+    json.dump(mydict, handle, sort_keys=True, indent = 2)
+
+
+# for value, key in mydict.items():
+    print(f"Function inputted: {key}, Syntax inputted: {value}")
 
 
 
-print(mydict)
-
+with open("my_list.txt", "w") as handle:
+        for key, value in mydict.items():
+            handle.write(f"Function: {value}          Syntax:{key}\n")
+       
