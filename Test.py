@@ -25,5 +25,5 @@ with open("my_list.txt", "w") as handle:
         handle.write("{:^200}  {:^125}\n".format("Function:","Syntax:\n"))
         for key, value in mydict.items():
              handle.write("{:^200}  {:^125}\n".format(value, key))
-            
-       
+
+print("fire")     
