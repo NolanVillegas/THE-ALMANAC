@@ -5,8 +5,8 @@ with open('filename.json', 'r') as handle:
 
 function_input = input("Function: ")
 mylist = function_input.split("|")
-value = mylist[0].strip()
-key = mylist[1].strip()
+value = mylist[1].strip()
+key = mylist[0].strip()
 
 mydict[value] = key
 
