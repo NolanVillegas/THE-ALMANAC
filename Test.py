@@ -2,7 +2,7 @@ import json
 
 
 
-print("\n\n\033[35mEnter a function and its syntax in format 'Function | Syntax'\nType \"deposit\" to save and deposit the input(s).\033[0m\n\n\n")
+print("\n\n\033[35mEnter a function and its syntax in format 'Function | Syntax'\nType \"deposit\" to save and deposit the input(s).\nType \"find\" to initate find mode.\033[0m\n\n\n")
 
 def search(data, searcht):
     results = []
@@ -15,14 +15,14 @@ with open('filename.json', 'r') as handle:
         mydict = json.load(handle)
 def find() :
     while True :
-        find_spec = input("\033[92mFind: \033[0m")
-        if find_spec.lower().strip() == "exit" : 
+        find_spec = input("\033[92mFind: \033[0m").strip()
+        if find_spec.lower() == "exit" : 
             break
         search_res = search(mydict, find_spec)
         print('\n')
-        print(f"\033[35m\033[4mSearch Results for {find_spec}\033[0m")
+        print(f"\033[92m\033[4mSearch Results for \'{find_spec}\'\033[0m")
         for key, value in search_res:
-            print(f"\033[92m{key}:    {value}\033[0m")
+            print(f"\033[0m{key}: {value}\033[0m")
         print('\n')
 
 while True:
