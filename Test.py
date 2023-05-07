@@ -6,38 +6,40 @@ print("\n\n\033[35mEnter a function and its syntax in format 'Function | Syntax'
 
 def search(data, searcht):
     results = []
-    for match in data:
-         if searcht in match:
-              results.append(match)
+    for key, value in data.items():
+         if searcht in key or searcht in value:
+              results.append((key,value))
     return results
 
 with open('filename.json', 'r') as handle:
         mydict = json.load(handle)
-
-while True :
-    find_spec = input("\033[36mFind: ")
-    if find_spec.lower() == "exit" : 
-        break
-    search_res = search(mydict, find_spec)
-    for result in search_res:
+def find() :
+    while True :
+        find_spec = input("\033[92mFind: \033[0m")
+        if find_spec.lower().strip() == "exit" : 
+            break
+        search_res = search(mydict, find_spec)
         print('\n')
-        print(result)
+        print(f"\033[35m\033[4mSearch Results for {find_spec}\033[0m")
+        for key, value in search_res:
+            print(f"\033[92m{key}:    {value}\033[0m")
+        print('\n')
 
 while True:
     
     function_input = input("\033[36mFunction|Syntax: \033[0m")
     mylist = function_input.split("|")
 
-    if function_input.lower() == "deposit" :
+    if function_input.lower().strip() == "deposit" :
          break
     
-    if function_input.lower() == "find" :
-         print("Search for a term or type \'exit\' to exit") 
-         search()
+    if function_input.lower().strip() == "find" :
+         print("\033[35mSearch for a term or type \'exit\' to exit\033[0m\n") 
+         find()
          break
 
     if len(mylist) != 2:
-        print("Invalid input. Please enter a valid function and syntax in the specified format.")
+        print("\033[31mInvalid input. Please enter a valid function and syntax in the specified format.\033[0m")
         continue
 
     value = mylist[0].strip()
