@@ -1,2 +1,7 @@
                                    Function:                                                                                    Syntax:
                                               
+                                       a                                                                                           b                                                  
+                                       c                                                                                           d                                                  
+                                       d                                                                                           a                                                  
+                                      func                                                                                         a                                                  
+                                       j                                                                                           k                                                  

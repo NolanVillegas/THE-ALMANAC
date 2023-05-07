@@ -27,7 +27,7 @@ def find() :
 
 while True:
     
-    function_input = input("\033[36mFunction|Syntax: \033[0m")
+    function_input = input("\033[36m\033[1mFunction|Syntax: \033[0m")
     mylist = function_input.split("|")
 
     if function_input.lower().strip() == "deposit" :
@@ -46,7 +46,7 @@ while True:
     key = mylist[1].strip()
     mydict[value] = key
 
-    print(f"Function inputted: {value}, Syntax inputted: {key}")
+    print(f"\033[36mFunction inputted:\033[0m {value}\033[36m  Syntax inputted:\033[0m {key}")
 
     sortdict = sorted(mydict.items(), key = lambda x: x[0])
 
