@@ -1,11 +1,27 @@
 import json
 
 
+
 print("\n\n\033[35mEnter a function and its syntax in format 'Function | Syntax'\nType \"deposit\" to save and deposit the input(s).\033[0m\n\n\n")
 
+def search(data, searcht):
+    results = []
+    for match in data:
+         if searcht in match:
+              results.append(match)
+    return results
 
 with open('filename.json', 'r') as handle:
         mydict = json.load(handle)
+
+while True :
+    find_spec = input("\033[36mFind: ")
+    if find_spec.lower() == "exit" : 
+        break
+    search_res = search(mydict, find_spec)
+    for result in search_res:
+        print('\n')
+        print(result)
 
 while True:
     
@@ -13,6 +29,11 @@ while True:
     mylist = function_input.split("|")
 
     if function_input.lower() == "deposit" :
+         break
+    
+    if function_input.lower() == "find" :
+         print("Search for a term or type \'exit\' to exit") 
+         search()
          break
 
     if len(mylist) != 2:
@@ -35,5 +56,8 @@ while True:
         handle.write("{:^80}  {:^100}\n".format("Function:","Syntax:\n"))
         for item in sortdict:
              handle.write("{:^80}  {:^100}\n".format(item[0], item[1]))
-            
+
+
+
+
        
