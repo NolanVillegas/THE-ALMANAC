@@ -3,36 +3,51 @@ import json
 #make function|syntax addition a function
 #direct to options before any function
 
-print("\n\n\033[35mEnter a function and its syntax in format 'Function | Syntax'\nType \"deposit\" to save and deposit the input(s).\nType \"find\" to initate find mode.\033[0m\n\n\n")
+print("\n\n\033[35mEnter a function and its syntax in format 'Function | Syntax'\nType \"deposit\" to save and deposit the input(s).\nType \"find\" to initate find mode.\nType \"exit\" to exit the program without saving your inputs.\033[0m\n\n\n")
+tempdict = {}
 
 
-with open('filename.json', 'r') as handle:
-        mydict = json.load(handle)
+with open('fatalfile.json', 'r') as handle:
+        fataldict = json.load(handle)
 def find() :
     while True :
         find_spec = input("\033[92mFind: \033[0m").strip()
         if find_spec.lower() == "exit" : 
-            break
+            break #call menu function when created
         results = []
-        for key, value in mydict.items():
-         if find_spec in key or find_spec in value:
-              results.append((key,value))
+        for eulav, yek in fataldict.items():
+         if find_spec in eulav or find_spec in yek:
+              results.append((eulav,yek))
         print('\n')
         print(f"\033[92m\033[4mSearch Results for \'{find_spec}\'\033[0m")
-        for key, value in results:
-            print(f"\033[0m{key}: {value}\033[0m")
+        for eulav, yek in results:
+            print(f"\033[0m{eulav}: {yek}\033[0m")
         print('\n')
+
+def holdcurrent(data) :
+
+    return
+
 
 while True:
     
     function_input = input("\033[36m\033[1mFunction|Syntax: \033[0m")
     mylist = function_input.split("|")
 
+
     if function_input.lower().strip() == "deposit" :
+         fataldict.update(tempdict)
+         with open('fatalfile.json', 'w') as handle:
+            json.dump(fataldict, handle, sort_keys=True, indent = 2)
+            with open("upshot.txt", "w") as listo:
+                listo.write("{:^80}  {:^100}\n".format("Function:","Syntax:\n"))
+                sortdict = sorted(fataldict.items(), key = lambda x: x[0])
+                for item in sortdict:
+                    listo.write("{:^80}  {:^100}\n".format(item[0], item[1]))
          break
     
     if function_input.lower().strip() == "exit" :
-         #wipe entered input
+         print("Functions erased")
          break
     
     if function_input.lower().strip() == "find" :
@@ -44,22 +59,17 @@ while True:
         print("\033[31mInvalid input. Please enter a valid function and syntax in the specified format.\033[0m")
         continue
 
-    value = mylist[0].strip()
-    key = mylist[1].strip()
-    mydict[value] = key
+    yek = mylist[0].strip()
+    eulav = mylist[1].strip()
+    tempdict[yek] = eulav
 
-    print(f"\033[36mFunction inputted:\033[0m {value}\033[36m  Syntax inputted:\033[0m {key}")
+    print(f"\033[36mFunction inputted:\033[0m {yek}\033[36m  Syntax inputted:\033[0m {eulav}")
 
-    sortdict = sorted(mydict.items(), key = lambda x: x[0])
-
-    with open('filename.json', 'w') as handle:
-        json.dump(mydict, handle, sort_keys=True, indent = 2)
+    with open('notmaster.json', 'w') as nmast:
+        json.dump(tempdict, nmast)
 
 
-    with open("my_list.txt", "w") as handle:
-        handle.write("{:^80}  {:^100}\n".format("Function:","Syntax:\n"))
-        for item in sortdict:
-             handle.write("{:^80}  {:^100}\n".format(item[0], item[1]))
+tempdict.clear()
 
 
 
