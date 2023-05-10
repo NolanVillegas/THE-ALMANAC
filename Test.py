@@ -3,9 +3,10 @@ import json
 #make function|syntax addition a function
 #direct to options before any function
 
-print("\n\n\033[35mEnter a function and its syntax in format 'Function | Syntax'\nType \"deposit\" to save and deposit the input(s).\nType \"find\" to initate find mode.\nType \"exit\" to exit the program without saving your inputs.\033[0m\n\n\n")
+print("\n\n\033[35mType \"add\" to add functions with a corresponding syntax.\nType \"find\" to initate find mode.\033[0m\n\n\n")
 tempdict = {}
 
+fatal_input = input("\033[33mEnter the task to execute:\033[0m")
 
 with open('fatalfile.json', 'r') as handle:
         fataldict = json.load(handle)
@@ -24,49 +25,55 @@ def find() :
             print(f"\033[0m{eulav}: {yek}\033[0m")
         print('\n')
 
-def holdcurrent(data) :
 
-    return
+def addfunc() :
+    print("\033[36mEnter a function and its syntax in format 'Function | Syntax'\033[0m")
+    print("\033[36mType \"deposit\" to save and deposit the input(s).\033[0m")
+    print("\033[36mType \"exit\" to exit the program without saving your inputs.\033[0m\n\n")
+    while True:
+        
+
+        function_input = input("\033[36m\033[1mFunction|Syntax: \033[0m")
+        mylist = function_input.split("|")
 
 
-while True:
-    
-    function_input = input("\033[36m\033[1mFunction|Syntax: \033[0m")
-    mylist = function_input.split("|")
+        if function_input.lower().strip() == "deposit" :
+            fataldict.update(tempdict)
+            with open('fatalfile.json', 'w') as handle:
+                json.dump(fataldict, handle, sort_keys=True, indent = 2)
+                with open("upshot.txt", "w") as listo:
+                    listo.write("{:^80}  {:^100}\n".format("Function:","Syntax:\n"))
+                    sortdict = sorted(fataldict.items(), key = lambda x: x[0])
+                    for item in sortdict:
+                        listo.write("{:^80}  {:^100}\n".format(item[0], item[1]))
+            break
+        
+        if function_input.lower().strip() == "exit" :
+            print("Entered functions erased")
+            break
+        
+        
 
+        if len(mylist) != 2:
+            print("\033[31mInvalid input. Please enter a valid function and syntax in the specified format.\033[0m")
+            continue
 
-    if function_input.lower().strip() == "deposit" :
-         fataldict.update(tempdict)
-         with open('fatalfile.json', 'w') as handle:
-            json.dump(fataldict, handle, sort_keys=True, indent = 2)
-            with open("upshot.txt", "w") as listo:
-                listo.write("{:^80}  {:^100}\n".format("Function:","Syntax:\n"))
-                sortdict = sorted(fataldict.items(), key = lambda x: x[0])
-                for item in sortdict:
-                    listo.write("{:^80}  {:^100}\n".format(item[0], item[1]))
-         break
-    
-    if function_input.lower().strip() == "exit" :
-         print("Functions erased")
-         break
-    
-    if function_input.lower().strip() == "find" :
-         print("\033[35mSearch for a term or type \'exit\' to exit\033[0m\n") 
-         find()
-         break
+        yek = mylist[0].strip()
+        eulav = mylist[1].strip()
+        tempdict[yek] = eulav
 
-    if len(mylist) != 2:
-        print("\033[31mInvalid input. Please enter a valid function and syntax in the specified format.\033[0m")
-        continue
+        print(f"\033[36mFunction inputted:\033[0m {yek}\033[36m  Syntax inputted:\033[0m {eulav}")
 
-    yek = mylist[0].strip()
-    eulav = mylist[1].strip()
-    tempdict[yek] = eulav
+        with open('notmaster.json', 'w') as nmast:
+            json.dump(tempdict, nmast)
 
-    print(f"\033[36mFunction inputted:\033[0m {yek}\033[36m  Syntax inputted:\033[0m {eulav}")
+if fatal_input.lower().strip() == "find" :
+            print("\033[35mSearch for a term or type \'exit\' to exit\033[0m\n") 
+            find()
 
-    with open('notmaster.json', 'w') as nmast:
-        json.dump(tempdict, nmast)
+if fatal_input.lower().strip() == "add" :
+            addfunc()
+            
 
 
 tempdict.clear()
