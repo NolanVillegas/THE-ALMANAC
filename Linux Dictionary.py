@@ -1,34 +1,30 @@
 import json
-import sys
-
-
-
 
 def main() :
-     
-    print("\n\n\033[35mType \"add\" to add functions with a corresponding syntax.\nType \"find\" to initate find mode.\033[0m\n\n\n")
-    
+    while True :
+        print("\n\n\033[35mType \"add\" to add functions with a corresponding syntax.\nType \"find\" to initate find mode.\033[0m\n\n\n")
+        
 
-    fatal_input = input("\033[33mEnter the task to execute:\033[0m")
+        fatal_input = input("\033[33mEnter the task to execute:\033[0m")
 
-    with open('fatalfile.json', 'r') as handle:
-       fataldict = json.load(handle)
+        with open('fatalfile.json', 'r') as handle:
+            fataldict = json.load(handle)
 
-    if fatal_input.lower().strip() == "find" :
-        print("\033[92mSearch for a term or type \'exit\' to exit\033[0m\n") 
-        find(fataldict)
+        if fatal_input.lower().strip() == "find" :
+            print("\033[92mSearch for a term or type \'exit\' to exit\033[0m\n") 
+            find(fataldict)
 
-    if fatal_input.lower().strip() == "add" :
-        addfunc(fataldict)
+        if fatal_input.lower().strip() == "add" :
+            addfunc(fataldict)
 
-    if fatal_input.lower().strip() == "exit" :
-        sys.exit()
+        if fatal_input.lower().strip() == "exit" :
+            break
 
 def find(fataldict) :
     while True :
         find_spec = input("\033[92mFind: \033[0m").strip()
         if find_spec.lower() == "exit" :  
-            main()
+            break
         results = []
         for eulav, yek in fataldict.items():
             if find_spec in eulav or find_spec in yek:
@@ -53,25 +49,30 @@ def addfunc(fataldict) :
 
 
         if function_input.lower().strip() == "deposit" :
-            print("Input(s) saved.")
             fataldict.update(tempdict)
+            tempdict.clear()
+            maxlen = max(max(len(x) for x in fataldict),9)
             with open('fatalfile.json', 'w') as handle:
                 json.dump(fataldict, handle, sort_keys=True, indent = 2)
-                with open("upshot.txt", "w") as handle:
-                    handle.write("{:^80}  {:^100}\n".format("Function:","Syntax:\n"))
-                    sortdict = sorted(fataldict.items(), key = lambda x: x[0])
-                    for item in sortdict:
-                        handle.write("{:^80}  {:^100}\n".format(item[0], item[1]))
-                        main()
+            with open("upshot.txt", "w") as listo:
+                listo.write('{key: <{width}}    {value}'.format(key = "Function:",width = maxlen, value ="Syntax:\n"))
+                sortdict = sorted(fataldict.items(), key = lambda x: x[0])
+                for item in sortdict:
+                    listo.write('{key: <{width}}    {value}\n'.format(key = item[0], width = maxlen, value = item[1]))
+            print("Input(s) saved.")
+
+            continue
+            
+
         
-        if function_input.lower().strip() == "exit" :
+        elif function_input.lower().strip() == "exit" :
             print("Entered functions erased")
-            main()
+            break
 
         
         
 
-        if len(mylist) != 2:
+        elif len(mylist) != 2:
             print("\033[31mInvalid input. Please enter a valid function and syntax in the specified format.\033[0m")
             continue
 
@@ -81,16 +82,6 @@ def addfunc(fataldict) :
 
         print(f"\033[36mFunction inputted:\033[0m {yek}\033[36m  Syntax inputted:\033[0m {eulav}")
 
-        with open('notmaster.json', 'w') as nmast:
-            json.dump(tempdict, nmast)
-    
-                
-
-
-    
-
-   
-                
 if __name__ == "__main__":
      main()
 

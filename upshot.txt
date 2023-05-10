@@ -1,3 +1,29 @@
-                                   Function:                                                                                    Syntax:
-                                              
-                                      000                                                                                         111                                                 
+Function:    Syntax:
+000          111
+222          333
+333          444
+77           88
+LL           AA
+a            b
+aa           bb
+aaa          bbbg
+aaaa         ffff
+c            d
+d            a
+ddd          jjj
+dpasofj      sifaoi
+fff          ddd
+ffff         uuu
+func         syn
+gg           bb
+ggg          kkk
+ggggg        qqqqqqqq
+hh           ggb
+hhh          ddd
+j            k
+jjj          ddd
+p            o
+pp           ww
+ttt          ppp
+ttttttt      nnnnnn
+wwww         gggg
