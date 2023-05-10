@@ -35,7 +35,6 @@ def find(fataldict) :
             print(f"\033[0m{eulav}: {yek}\033[0m")
         print('\n')
             
-
 def addfunc(fataldict) :
     tempdict = {}
     print("\033[36mEnter a function and its syntax in format 'Function | Syntax'\033[0m")
